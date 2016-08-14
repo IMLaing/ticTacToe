@@ -1,0 +1,26 @@
+body * {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+.fullBoard {
+	width: 60em;
+	margin: 0 auto;
+}
+.fullBoard > div > div {
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.mid.row {
+	border-top: 5px black solid;
+	border-bottom: 5px black solid;
+	width: 300px;
+}
+
+.Middle {
+	border-right:5px black solid;
+	border-left:5px black solid ;
+}
