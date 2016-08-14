@@ -3,10 +3,16 @@ body * {
 	margin: 0px;
 	box-sizing: border-box;
 }
-.fullBoard {
+section {
 	width: 60em;
 	margin: 0 auto;
 }
+
+.fullBoard {
+	width: 300px;
+	margin: 25px auto;
+}
+
 .fullBoard > div > div {
 	height: 100px;
 	width: 100px;
@@ -23,4 +29,17 @@ body * {
 .Middle {
 	border-right:5px black solid;
 	border-left:5px black solid ;
+}
+p {
+	font-size: 3em;
+	padding: 25%;
+	text-align: center;
+}
+h1 {
+	text-align: center;
+	font-size:  4em;
+}
+.newGameButton {
+	width: 175px;
+	margin: 0 auto;
 }

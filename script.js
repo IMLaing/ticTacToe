@@ -29,6 +29,7 @@ var Game = {
 		
 	},
 	newGame: function(){
+		$('#newGame').hide();
 		this.xHand = [''];
 		this.oHand = [''];
 		this.takenTiles = [''];
@@ -39,65 +40,65 @@ var Game = {
 };
 
 var winCondition = function(){
-	var winCodeX = Game.xHand.join('');
-	var winCodeO = Game.oHand.join('');
-	var x = jQuery.inArray( "topLeft", Game.xHand);
-	console.log(x + ' is inArray');
-
-
-	//joins all elements of array in to a string to compare against win result
-	/*switch (winCodeX){
-	 case "topLefttoptopRight":
-	 console.log('winCodeX has won the game!');
-	 Game.newGame();
-	 break;
-	 case "topLeftmidbotRight":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "topLeftmidLeftbotLeft":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "topmidbot":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "topRightmidbotLeft":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "topRightmidRightbotRight":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "midLeftmidmidRight":
-	 console.log('winCodeX has won the game!');
-	 break;
-	 case "botLeftbotbotRight":
-	 console.log('winCodeX has won the game!');
-	}*/
+	var winnerIs =  Game.currentPlayer();
+	var winCodeX = function() {
+		if ($('#topLeft').html() == '<p>' + winnerIs + '</p>' && $('#top').html() == '<p>' + winnerIs + '</p>' && $('#topRight').html() == '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#topLeft').html()=== '<p>' + winnerIs + '</p>' && $('#mid').html()=== '<p>' + winnerIs + '</p>' && $('#botRight').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#topLeft').html()=== '<p>' + winnerIs + '</p>' && $('#midLeft').html()=== '<p>' + winnerIs + '</p>' && $('#botLeft').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#top').html()=== '<p>' + winnerIs + '</p>' && $('#mid').html()=== '<p>' + winnerIs + '</p>' && $('#bot').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#topRight').html()=== '<p>' + winnerIs + '</p>' && $('#mid').html()=== '<p>' + winnerIs + '</p>' && $('#botLeft').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#topRight').html()=== '<p>' + winnerIs + '</p>'&& $('#midRight').html()=== '<p>' + winnerIs + '</p>' && $('#botRight').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#midLeft').html()=== '<p>' + winnerIs + '</p>' && $('#mid').html()=== '<p>' + winnerIs + '</p>' && $('#midRight').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if($('#botLeft').html()=== '<p>' + winnerIs + '</p>' && $('#bot').html()=== '<p>' + winnerIs + '</p>' && $('#botRight').html()=== '<p>' + winnerIs + '</p>'){
+			alert(winnerIs + ' WON THE GAME!');
+			$('#newGame').show();
+		} else if(Game.currentTurn == 8){
+			alert('NO CHICKEN DINNER');
+			$('#newGame').show();
+		} else {
+			console.log('no winner yet');
+		}
+	}; 
+	winCodeX();
+	console.log('current turn is ' + Game.currentTurn);
 };
 
+
 $(function(){
+	Game.newGame();
 	$('.cell').on('click', function(){
 	//console.log('you clicked ' + $(this).attr('id'));
 	/* To avoid the user changing the state of the cell we 
 	use one() which will only run the code once */
-		
 		var usersTile = $(this).attr('id');
-			
 		if (Game.takenTiles.includes(usersTile)){
 			console.log('taken tile');
 		} else {
 			Game.takenTiles.push(usersTile);
-			$(this).html(Game.currentPlayer());
+			$(this).html('<p>' + Game.currentPlayer() + '</p>');
 			//selecting id to use for determining winner
 			Game.usersHand(usersTile);
+			winCondition();
 			Game.currentTurn++;
 		}
-	
-		winCondition();
-		console.log('winCondition ran');
 
-		
+	});
+
+	$('#newGame').on('click', function(){
+		Game.newGame();
 	});
 });
-
-//push id of tile in to an array
-//if array contains taken square no html else html
